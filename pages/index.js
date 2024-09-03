@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { useRef } from "react";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { FaRegMinusSquare, FaRegPlusSquare, FaBed } from "react-icons/fa";
 
 export default function Home() {
   const audioRef = useRef(typeof Audio !== "undefined" && new Audio());
@@ -45,6 +46,144 @@ export default function Home() {
       setIsRunning(true);
       setIsResting(false);
     }
+  };
+
+  const RestTimerSmall = () => {
+    return (
+      <div className={styles.timerSmallPlaceholder}>
+        <p>
+          <FaBed style={{ transform: "scaleX(-1)" }} />
+          <span>
+            &nbsp;&nbsp; <b>Rest Timer</b> &nbsp;&nbsp;
+          </span>
+          <FaBed />
+        </p>
+        <div className={styles.timerSmallContainer}>
+          {!isRunning && !isResting && (
+            <div>
+              <div className={styles.iconButtonWrapper}>
+                <button
+                  className={styles.iconButtonSmall}
+                  onClick={() => {
+                    setDesiredRestMinutes(desiredRestMinutes + 1);
+                  }}
+                >
+                  <FaRegPlusSquare />
+                </button>
+                <button
+                  className={styles.iconButtonSmall}
+                  onClick={() => {
+                    if (desiredRestMinutes > 0) {
+                      setDesiredRestMinutes(desiredRestMinutes - 1);
+                    }
+                  }}
+                  disabled={desiredRestMinutes == 0}
+                >
+                  <FaRegMinusSquare />
+                </button>
+              </div>
+            </div>
+          )}
+          <div>
+            <h1 className={styles.timerSmall}>
+              {desiredRestMinutes < 10
+                ? `0${desiredRestMinutes}`
+                : desiredRestMinutes}
+              :
+              {desiredRestSeconds < 10
+                ? `0${desiredRestSeconds}`
+                : desiredRestSeconds}
+            </h1>
+          </div>
+          {!isRunning && !isResting && (
+            <div className={styles.iconButtonWrapper}>
+              <button
+                className={styles.iconButtonSmall}
+                onClick={() => {
+                  const newRestSeconds = (desiredRestSeconds + 1) % 60;
+                  setDesiredRestSeconds(newRestSeconds);
+                }}
+              >
+                <FaRegPlusSquare />
+              </button>
+              <button
+                className={styles.iconButtonSmall}
+                onClick={() => {
+                  const newRestSeconds =
+                    desiredRestSeconds == 0 ? 59 : desiredRestSeconds - 1;
+                  setDesiredRestSeconds(newRestSeconds);
+                }}
+              >
+                <FaRegMinusSquare />
+              </button>
+            </div>
+          )}
+        </div>
+      </div>
+    );
+  };
+
+  const Timer = () => {
+    return (
+      <div className={styles.timerContainer}>
+        {!isRunning && !isResting && (
+          <div className={styles.iconButtonWrapper}>
+            <button
+              className={styles.iconButton}
+              onClick={() => {
+                setDesiredMinutes(desiredMinutes + 1);
+                setMinutes(desiredMinutes + 1);
+              }}
+            >
+              <FaRegPlusSquare />
+            </button>
+            <button
+              className={styles.iconButton}
+              onClick={() => {
+                if (desiredMinutes > 0) {
+                  setDesiredMinutes(desiredMinutes - 1);
+                  setMinutes(desiredMinutes - 1);
+                }
+              }}
+              disabled={desiredMinutes == 0}
+            >
+              <FaRegMinusSquare />
+            </button>
+          </div>
+        )}
+        <div>
+          <h1 className={styles.timer}>
+            {minutes < 10 ? `0${minutes}` : minutes}:
+            {seconds < 10 ? `0${seconds}` : seconds}
+          </h1>
+        </div>
+        {!isRunning && !isResting && (
+          <div className={styles.iconButtonWrapper}>
+            <button
+              className={styles.iconButton}
+              onClick={() => {
+                const newSeconds = (desiredSeconds + 1) % 60;
+                setDesiredSeconds(newSeconds);
+                setSeconds(newSeconds);
+              }}
+            >
+              <FaRegPlusSquare />
+            </button>
+            <button
+              className={styles.iconButton}
+              onClick={() => {
+                const newSeconds =
+                  desiredSeconds == 0 ? 59 : desiredSeconds - 1;
+                setDesiredSeconds(newSeconds);
+                setSeconds(newSeconds);
+              }}
+            >
+              <FaRegMinusSquare />
+            </button>
+          </div>
+        )}
+      </div>
+    );
   };
 
   useEffect(() => {
@@ -99,73 +238,10 @@ export default function Home() {
       </Head>
 
       <main>
-        {/* Debug Information */}
-        {/* <div className={styles.debug}>
-          <p>isRunning: {isRunning.toString()}</p>
-          <p>isResting: {isResting.toString()}</p>
-          <p>minutes: {minutes}</p>
-          <p>seconds: {seconds}</p>
-          <p>desiredMinutes: {desiredMinutes}</p>
-          <p>desiredSeconds: {desiredSeconds}</p>
-          <p>desiredRestMinutes: {desiredRestMinutes}</p>
-          <p>desiredRestSeconds: {desiredRestSeconds}</p>
-        </div> */}
-
         {/* Timer */}
-        <div className={styles.timerWrapper}>
-          <h1 className={styles.timer}>
-            {minutes < 10 ? `0${minutes}` : minutes}:
-            {seconds < 10 ? `0${seconds}` : seconds}
-          </h1>
-        </div>
+        <Timer />
 
-        <div className={styles.controls}>
-          {/* create display for desired number of minutes */}
-          <h2>Minutes: {desiredMinutes}</h2>
-          {/* create display for desired number of seconds */}
-          <h2>Seconds: {desiredSeconds}</h2>
-          {/* create display for desired number of rest minutes */}
-          <h2>Rest Minutes: {desiredRestMinutes}</h2>
-          {/* create display for desired number of rest seconds */}
-          <h2>Rest Seconds: {desiredRestSeconds}</h2>
-        </div>
-        <div className={styles.controls}>
-          {/* create input to set the desired number of minutes */}
-          <input
-            type="number"
-            placeholder="Minutes"
-            value={desiredMinutes}
-            onChange={(e) => {
-              setDesiredMinutes(e.target.value);
-              setMinutes(e.target.value);
-            }}
-          />
-          {/* create input to set the desired number of seconds */}
-          <input
-            type="number"
-            placeholder="Seconds"
-            value={desiredSeconds}
-            onChange={(e) => {
-              setDesiredSeconds(e.target.value);
-              setSeconds(e.target.value);
-            }}
-          />
-          {/* create input to set the desired number of rest minutes */}
-          <input
-            type="number"
-            placeholder="Rest Minutes"
-            value={desiredRestMinutes}
-            onChange={(e) => setDesiredRestMinutes(e.target.value)}
-          />
-          {/* create input to set the desired number of rest seconds */}
-          <input
-            type="number"
-            placeholder="Rest Seconds"
-            value={desiredRestSeconds}
-            onChange={(e) => setDesiredRestSeconds(e.target.value)}
-          />
-        </div>
-
+        {/* Start/Stop */}
         <div className={styles.controls}>
           {!isRunning && !isResting && (
             <button onClick={startTimer} className={styles.startButton}>
@@ -176,6 +252,15 @@ export default function Home() {
             <button onClick={stopTimer} className={styles.stopButton}>
               Stop
             </button>
+          )}
+        </div>
+
+        {/* Small Rest Timer */}
+        <div>
+          {!isRunning && !isResting ? (
+            <RestTimerSmall />
+          ) : (
+            <div className={styles.controlsPlaceholder} />
           )}
         </div>
       </main>

@@ -43,25 +43,98 @@
   );
 }
 
-.timerWrapper {
+.timerContainer {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.timerSmallContainer {
+  height: 5vw;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.timerSmallPlaceholder p {
+  font-size: 2vw;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.timerSmallPlaceholder {
+  height: 5vw; /* Adjust to match the height of .timerSmallContainer */
+  width: 100%; /* Adjust to match the width of .timerSmallContainer */
+}
+
+.timer {
+  margin: 0;
+  font-size: 20vw;
+  color: white;
+  font-family: Courier, "Courier New", monospace;
+}
+
+.timerSmall {
+  margin: 0;
+  font-size: 8vw;
+  color: white;
+  font-family: Courier, "Courier New", monospace;
+}
+
+.iconButtonWrapper {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-.timer {
-  margin: 0 0 1rem;
-  line-height: 1.15;
-  font-size: 15rem;
+.iconButton {
+  margin: 0.25rem 1vw;
+  padding: 0.25rem 0.25rem;
+  font-size: 2.5vw;
+  background: none;
   color: white;
-  font-family: Courier, "Courier New", monospace;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.iconButtonSmall {
+  margin: 0.25rem 1vw;
+  padding: 0.25rem 0.25rem;
+  font-size: 2vw;
+  background: none;
+  color: white;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.controlsContainer {
+  height: 5rem;
+  width: 100%;
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
 }
 
 .controls {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.controlsPlaceholder {
+  height: 5rem; /* Adjust to match the height of .controlsContainer */
+  width: 100%; /* Adjust to match the width of .controlsContainer */
 }
 
 .debug {
@@ -72,25 +145,25 @@
 }
 
 .startButton {
-  margin: 0.5rem 0.5rem;
-  padding: 0.5rem 2rem;
-  font-size: 1rem;
+  margin: 0vw 0vw;
+  padding: 1vw 5vw;
+  font-size: 2.5vw;
   font-weight: bold;
   color: white;
   background-color: #2481eb;
   border: 0;
-  border-radius: 5px;
+  border-radius: 1vw;
   cursor: pointer;
 }
 
 .stopButton {
-  margin: 0.5rem 0.5rem;
-  padding: 0.5rem 2rem;
-  font-size: 1rem;
+  margin: 0vw 0vw;
+  padding: 1vw 5vw;
+  font-size: 2.5vw;
   font-weight: bold;
   color: white;
   background-color: #eb3b53;
   border: 0;
-  border-radius: 5px;
+  border-radius: 1vw;
   cursor: pointer;
 }
