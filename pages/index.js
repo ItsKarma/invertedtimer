@@ -28,8 +28,8 @@ export default function Home() {
   const stopTimer = () => {
     setIsRunning(false);
     setIsResting(false);
-    setMinutes(0);
-    setSeconds(0);
+    setMinutes(desiredMinutes);
+    setSeconds(desiredSeconds);
   };
 
   const toggleRunningResting = () => {
@@ -82,7 +82,7 @@ export default function Home() {
       }
     }, 1000);
     return () => clearInterval(interval);
-  }, [seconds, minutes, audioRef, audioSrc]);
+  }, [seconds, minutes, audioRef, audioSrc, isRunning, isResting]);
 
   return (
     // if the timer is running, set the background color to green, otherwise set it to red
