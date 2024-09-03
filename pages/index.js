@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Script from "next/script";
 import styles from "../styles/Home.module.css";
 import { useEffect, useState } from "react";
 import { useRef } from "react";
@@ -94,6 +95,7 @@ export default function Home() {
       <Head>
         <title>Inverted Timer</title>
         <link rel="icon" href="/favicon.ico" />
+        <Script>/*to prevent Firefox FOUC, this must be here*/ 0</Script>
       </Head>
 
       <main>
