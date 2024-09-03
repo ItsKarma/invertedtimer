@@ -9,11 +9,11 @@ export default function Home() {
   const audioRef = useRef(typeof Audio !== "undefined" && new Audio());
   //TODO: Add a way to change the audio source
   const [audioSrc, setAudioSrc] = useState("/beep.mp3");
-  const [desiredMinutes, setDesiredMinutes] = useState(0);
-  const [desiredSeconds, setDesiredSeconds] = useState(5);
-  const [desiredRestMinutes, setDesiredRestMinutes] = useState(0);
-  const [desiredRestSeconds, setDesiredRestSeconds] = useState(3);
-  const [minutes, setMinutes] = useState(0);
+  const [desiredMinutes, setDesiredMinutes] = useState(5);
+  const [desiredSeconds, setDesiredSeconds] = useState(0);
+  const [desiredRestMinutes, setDesiredRestMinutes] = useState(1);
+  const [desiredRestSeconds, setDesiredRestSeconds] = useState(0);
+  const [minutes, setMinutes] = useState(5);
   const [seconds, setSeconds] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
   const [isResting, setIsResting] = useState(false);
