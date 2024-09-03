@@ -62,8 +62,8 @@ export default function Home() {
     let interval = setInterval(() => {
       clearInterval(interval);
       if (isRunning || isResting) {
-        if (seconds === 0) {
-          if (minutes === 0) {
+        if (seconds == 0) {
+          if (minutes == 0) {
             // play audio
             if (audioRef.current) {
               audioRef.current.src = audioSrc;
@@ -133,14 +133,20 @@ export default function Home() {
             type="number"
             placeholder="Minutes"
             value={desiredMinutes}
-            onChange={(e) => setDesiredMinutes(e.target.value)}
+            onChange={(e) => {
+              setDesiredMinutes(e.target.value);
+              setMinutes(e.target.value);
+            }}
           />
           {/* create input to set the desired number of seconds */}
           <input
             type="number"
             placeholder="Seconds"
             value={desiredSeconds}
-            onChange={(e) => setDesiredSeconds(e.target.value)}
+            onChange={(e) => {
+              setDesiredSeconds(e.target.value);
+              setSeconds(e.target.value);
+            }}
           />
           {/* create input to set the desired number of rest minutes */}
           <input
@@ -160,13 +166,13 @@ export default function Home() {
 
         <div className={styles.controls}>
           {!isRunning && !isResting && (
-            <button onClick={startTimer} className="start-button">
-              Start Timer
+            <button onClick={startTimer} className={styles.startButton}>
+              Start
             </button>
           )}
           {(isRunning || isResting) && (
-            <button onClick={stopTimer} className="stop-button">
-              Stop Timer
+            <button onClick={stopTimer} className={styles.stopButton}>
+              Stop
             </button>
           )}
         </div>
