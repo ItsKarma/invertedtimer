@@ -1,6 +1,8 @@
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import { useEffect, useState } from "react";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export default function Home() {
   const [desiredRounds, setDesiredRounds] = useState(0);
@@ -154,6 +156,8 @@ export default function Home() {
           </button>
         </div>
       </main>
+      <Analytics />
+      <SpeedInsights />
     </div>
   );
 }
