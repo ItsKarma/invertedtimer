@@ -202,15 +202,17 @@ export default function Home() {
     let interval = setInterval(() => {
       clearInterval(interval);
       if (isRunning || isResting) {
+        if (minutes == 0 && seconds == 1) {
+          // play audio
+          if (audioRef.current) {
+            audioRef.current.src = audioSrc;
+            audioRef.current.play();
+          } else {
+            console.log("Audio not supported");
+          }
+        }
         if (seconds == 0) {
           if (minutes == 0) {
-            // play audio
-            if (audioRef.current) {
-              audioRef.current.src = audioSrc;
-              audioRef.current.play();
-            } else {
-              console.log("Audio not supported");
-            }
             toggleRunningResting();
           } else {
             setSeconds(59);
