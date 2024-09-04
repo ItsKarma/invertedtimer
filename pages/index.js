@@ -10,7 +10,8 @@ import { FaRegMinusSquare, FaRegPlusSquare, FaBed } from "react-icons/fa";
 export default function Home() {
   const audioRef = useRef(typeof Audio !== "undefined" && new Audio());
   //TODO: Add a way to change the audio source
-  const [audioSrc, setAudioSrc] = useState("/beep.mp3");
+  const [audioSrc, setAudioSrc] = useState("/beepLoud.mp3");
+  const [audioVolume, setAudioVolume] = useState(1);
   const [desiredMinutes, setDesiredMinutes] = useState(5);
   const [desiredSeconds, setDesiredSeconds] = useState(0);
   const [desiredRestMinutes, setDesiredRestMinutes] = useState(1);
@@ -205,6 +206,7 @@ export default function Home() {
         if (minutes == 0 && seconds == 1) {
           // play audio
           if (audioRef.current) {
+            audioRef.current.volume = audioVolume;
             audioRef.current.src = audioSrc;
             audioRef.current.play();
           } else {
