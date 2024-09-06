@@ -21,6 +21,16 @@ export default function Home() {
   const [isRunning, setIsRunning] = useState(false);
   const [isResting, setIsResting] = useState(false);
 
+  async function incrementRounds() {
+    try {
+      await fetch("/api/incrementRounds", {
+        method: "POST",
+      });
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  }
+
   const startTimer = () => {
     setIsResting(false);
     setIsRunning(true);
@@ -212,6 +222,10 @@ export default function Home() {
           } else {
             console.log("Audio not supported");
           }
+          // increment rounds
+          if (isRunning) {
+            incrementRounds();
+          }
         }
         if (seconds == 0) {
           if (minutes == 0) {
@@ -238,7 +252,8 @@ export default function Home() {
       <Head>
         <title>Inverted Timer</title>
         <link rel="icon" href="/favicon.ico" />
-        <Script>/*to prevent Firefox FOUC, this must be here*/ 0</Script>
+        {/* to prevent Firefox FOUC, this must be here */}
+        <Script>0</Script>
       </Head>
 
       <main>
