@@ -5,8 +5,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: rgb(20, 105, 14);
-  background: linear-gradient(0deg, rgb(20, 105, 14) 0%, rgb(29, 209, 38) 100%);
+  background: rgb(31, 159, 22);
+  background: linear-gradient(0deg, rgb(31, 159, 22) 0%, rgb(29, 209, 38) 100%);
 }
 
 .resting {
@@ -16,8 +16,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: rgb(131, 8, 8);
-  background: linear-gradient(0deg, rgb(131, 8, 8) 0%, rgb(255, 31, 31) 100%);
+  background: rgb(205, 27, 27);
+  background: linear-gradient(0deg, rgb(205, 27, 27) 0%, rgb(255, 31, 31) 100%);
 }
 
 .default {
@@ -27,10 +27,10 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: rgb(34, 193, 195);
+  background: rgb(32, 213, 216);
   background: linear-gradient(
     0deg,
-    rgba(34, 193, 195, 1) 0%,
+    rgb(32, 213, 216) 0%,
     rgba(45, 253, 209, 1) 100%
   );
 }
