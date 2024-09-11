@@ -114,7 +114,7 @@ export default function Home() {
               <button
                 className={styles.iconButtonSmall}
                 onClick={() => {
-                  const newRestSeconds = (desiredRestSeconds + 1) % 60;
+                  const newRestSeconds = (desiredRestSeconds + 5) % 60;
                   setDesiredRestSeconds(newRestSeconds);
                 }}
               >
@@ -124,7 +124,7 @@ export default function Home() {
                 className={styles.iconButtonSmall}
                 onClick={() => {
                   const newRestSeconds =
-                    desiredRestSeconds == 0 ? 59 : desiredRestSeconds - 1;
+                    desiredRestSeconds == 0 ? 55 : desiredRestSeconds - 5;
                   setDesiredRestSeconds(newRestSeconds);
                 }}
               >
@@ -176,7 +176,7 @@ export default function Home() {
             <button
               className={styles.iconButton}
               onClick={() => {
-                const newSeconds = (desiredSeconds + 1) % 60;
+                const newSeconds = (desiredSeconds + 5) % 60;
                 setDesiredSeconds(newSeconds);
                 setSeconds(newSeconds);
               }}
@@ -187,7 +187,7 @@ export default function Home() {
               className={styles.iconButton}
               onClick={() => {
                 const newSeconds =
-                  desiredSeconds == 0 ? 59 : desiredSeconds - 1;
+                  desiredSeconds == 0 ? 55 : desiredSeconds - 5;
                 setDesiredSeconds(newSeconds);
                 setSeconds(newSeconds);
               }}
