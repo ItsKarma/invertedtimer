@@ -6,6 +6,8 @@ import { useRef } from "react";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { FaRegMinusSquare, FaRegPlusSquare, FaBed } from "react-icons/fa";
+import toast, { Toaster } from "react-hot-toast";
+import NoSsr from "./components/NoSsr";
 
 export default function Home() {
   const audioRef = useRef(typeof Audio !== "undefined" && new Audio());
@@ -20,6 +22,7 @@ export default function Home() {
   const [seconds, setSeconds] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
   const [isResting, setIsResting] = useState(false);
+  const [time, setTime] = useState(new Date());
 
   async function incrementRounds() {
     try {
@@ -197,6 +200,24 @@ export default function Home() {
     );
   };
 
+  const Clock = () => {
+    // return html displaying the current time
+    // we use NoSsr to prevent server-side rendering of the time which causes hydration issues
+    return (
+      <div className={styles.clockContainer}>
+        <p>
+          <NoSsr>
+            {time.toLocaleTimeString([], {
+              hour: "2-digit",
+              minute: "2-digit",
+              hour12: true,
+            })}
+          </NoSsr>
+        </p>
+      </div>
+    );
+  };
+
   useEffect(() => {
     // add event listener for space bar
     document.addEventListener("keyup", (event) => {
@@ -209,6 +230,13 @@ export default function Home() {
       }
     });
 
+    // timer logic: this will run every 10 seconds
+    let timeInterval = setInterval(() => {
+      // update the time
+      let nwDate = new Date();
+      setTime(nwDate);
+    }, 1000);
+
     // timer logic: this will run every second
     let interval = setInterval(() => {
       clearInterval(interval);
@@ -220,7 +248,8 @@ export default function Home() {
             audioRef.current.src = audioSrc;
             audioRef.current.play();
           } else {
-            console.log("Audio not supported");
+            console.error("Audio Error");
+            toast.error("Audio Error", { duration: 10000 });
           }
           // increment rounds
           if (isRunning) {
@@ -239,7 +268,11 @@ export default function Home() {
         }
       }
     }, 1000);
-    return () => clearInterval(interval);
+
+    return () => {
+      clearInterval(interval);
+      clearInterval(timeInterval);
+    };
   }, [seconds, minutes, audioRef, audioSrc, isRunning, isResting]);
 
   return (
@@ -257,6 +290,14 @@ export default function Home() {
       </Head>
 
       <main>
+        {/* Toaster - Keep at top */}
+        <NoSsr>
+          <Toaster position="top-right" />
+        </NoSsr>
+
+        {/* Clock */}
+        <Clock />
+
         {/* Timer */}
         <Timer />
 

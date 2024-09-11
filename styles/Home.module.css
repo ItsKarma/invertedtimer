@@ -3,10 +3,9 @@
   padding: 0 0.5rem;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   background: rgb(31, 159, 22);
-  background: linear-gradient(0deg, rgb(31, 159, 22) 0%, rgb(29, 209, 38) 100%);
 }
 
 .resting {
@@ -14,10 +13,9 @@
   padding: 0 0.5rem;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   background: rgb(205, 27, 27);
-  background: linear-gradient(0deg, rgb(205, 27, 27) 0%, rgb(255, 31, 31) 100%);
 }
 
 .default {
@@ -25,14 +23,19 @@
   padding: 0 0.5rem;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   background: rgb(32, 213, 216);
-  background: linear-gradient(
-    0deg,
-    rgb(32, 213, 216) 0%,
-    rgba(45, 253, 209, 1) 100%
-  );
+}
+
+.clockContainer {
+  margin-top: -7vw;
+  margin-bottom: -7vw;
+  font-size: 7vw;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .timerContainer {
@@ -108,14 +111,6 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-}
-
-.controlsContainer {
-  height: 5rem;
-  width: 100%;
-  /* display: flex;
-  justify-content: center;
-  align-items: center; */
 }
 
 .controls {
