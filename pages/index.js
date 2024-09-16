@@ -65,13 +65,6 @@ export default function Home() {
   const RestTimerSmall = () => {
     return (
       <div className={styles.timerSmallPlaceholder}>
-        <p>
-          <FaBed style={{ transform: "scaleX(-1)" }} />
-          <span>
-            &nbsp;&nbsp; <b>Rest Timer</b> &nbsp;&nbsp;
-          </span>
-          <FaBed />
-        </p>
         <div className={styles.timerSmallContainer}>
           {!isRunning && !isResting && (
             <div>

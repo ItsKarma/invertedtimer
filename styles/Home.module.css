@@ -29,9 +29,9 @@
 }
 
 .clockContainer {
-  margin-top: -7vw;
-  margin-bottom: -7vw;
-  font-size: 7vw;
+  margin-top: -12vw;
+  margin-bottom: -12vw;
+  font-size: 12vw;
   color: white;
   display: flex;
   justify-content: center;
@@ -68,14 +68,14 @@
 
 .timer {
   margin: 0;
-  font-size: 20vw;
+  font-size: 25vw;
   color: white;
   font-family: Courier, "Courier New", "Lucida Sans Typewriter", monospace;
 }
 
 .timerSmall {
   margin: 0;
-  font-size: 8vw;
+  font-size: 4vw;
   color: white;
   font-family: Courier, "Courier New", "Lucida Sans Typewriter", monospace;
 }
@@ -101,9 +101,9 @@
 }
 
 .iconButtonSmall {
-  margin: 0.25rem 1vw;
+  margin: 0 0.5vw;
   padding: 0.25rem 0.25rem;
-  font-size: 2vw;
+  font-size: 1.5vw;
   background: none;
   color: white;
   border: none;
