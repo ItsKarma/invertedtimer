@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { useRef } from "react";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { FaRegMinusSquare, FaRegPlusSquare, FaBed } from "react-icons/fa";
+import { FaRegMinusSquare, FaRegPlusSquare } from "react-icons/fa";
 import toast, { Toaster } from "react-hot-toast";
 import NoSsr from "./components/NoSsr";
 
@@ -223,7 +223,7 @@ export default function Home() {
       }
     });
 
-    // timer logic: this will run every 10 seconds
+    // timer logic: this will run every second
     let timeInterval = setInterval(() => {
       // update the time
       let nwDate = new Date();
@@ -232,9 +232,36 @@ export default function Home() {
 
     // timer logic: this will run every second
     let interval = setInterval(() => {
-      clearInterval(interval);
       if (isRunning || isResting) {
-        if (minutes == 0 && seconds == 1) {
+        if (minutes == 0 && seconds == 0) {
+          toggleRunningResting();
+          clearInterval(interval); // Clear interval when timer reaches 0:00
+          return;
+        }
+
+        // create local variables for minutes and seconds
+        let localMinutes = minutes;
+        let localSeconds = seconds;
+        // check if we need to decrement the timer
+        if (minutes != 0 && seconds == 0) {
+          // rolling down the minutes and setting seconds to 59
+          setSeconds(59);
+          setMinutes(minutes - 1);
+          localSeconds = 59;
+          localMinutes = minutes - 1;
+        } else if (seconds != 0) {
+          // decrementing seconds
+          setSeconds(seconds - 1);
+          localSeconds = seconds - 1;
+        } else {
+          console.error(`Error: Timer Logic: ${minutes}:${seconds}`);
+          toast.error(`Error: Timer Logic: ${minutes}:${seconds}`, {
+            duration: 10000,
+          });
+        }
+
+        // now that decrementing is done, we can check if the timer is at 0:00
+        if (localMinutes == 0 && localSeconds == 0) {
           // play audio
           if (audioRef.current) {
             audioRef.current.volume = audioVolume;
@@ -248,16 +275,6 @@ export default function Home() {
           if (isRunning) {
             incrementRounds();
           }
-        }
-        if (seconds == 0) {
-          if (minutes == 0) {
-            toggleRunningResting();
-          } else {
-            setSeconds(59);
-            setMinutes(minutes - 1);
-          }
-        } else {
-          setSeconds(seconds - 1);
         }
       }
     }, 1000);
